@@ -1,0 +1,61 @@
+/* 定义全局CSS */
+.editor-mian {
+  /* width: 1400px; */
+}
+
+/* 重置 docsify.js 的样式 */
+
+.content {
+  padding-top: 0px;
+  position: static;
+  margin: 0;
+  max-width: 1200px;
+}
+
+.markdown-section {
+  margin: 0;
+}
+
+/* ======= editor-heder 区域 ======= */
+
+.editor-heder {
+  height: 25px;
+  width: 100%;
+  background-color: #ddd;
+}
+
+/* ======= editor-md 区域 ======= */
+
+.editor-mian .editor-md {
+  width: 50%;
+  height: 600px;
+  background-color: #292b2c;
+  /* color: #fff; */
+  padding: 1.5rem 1.5rem;
+  overflow-y: auto;
+}
+
+.editor-mian .editor-md textarea {
+  color: #fff!important;
+  width: 100%!important;
+  border: 0!important;
+  overflow-x: hidden;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  background-color: #292b2c;
+  overflow: auto;
+  /*去除蓝色边框*/
+  border: 0;
+  outline: none;
+}
+
+
+/* ======= editor-docsify 区域 ======= */
+
+.editor-mian .editor-docsify {
+  width: 50%;
+  height: 600px;
+  overflow: auto;
+  /* background-color: red; */
+}
+

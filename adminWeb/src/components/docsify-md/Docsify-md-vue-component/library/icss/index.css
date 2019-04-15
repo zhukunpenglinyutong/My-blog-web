@@ -1,0 +1,11 @@
+@import url('./root/root.css'); /* 全局（样式）管理 */
+@import url('./reset/reset.css'); /* 样式重置模块 reset版本 */
+@import url('./tool/tool.css'); /* 工具库 */
+@import url('./layout/layout.css'); /* 基础布局模块 */
+/* 动画库 */
+
+/* 页面初始化配置 */
+body {
+  /*  */
+  background-color: var(--body-bgc2);
+}

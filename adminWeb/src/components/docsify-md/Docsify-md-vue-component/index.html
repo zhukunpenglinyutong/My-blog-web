@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/library/icss/index.css">
+  <link rel="stylesheet" href="./src/library/docsify/vue.css">
+  <link rel="stylesheet" href="./src/css/index.css">
+</head>
+<body>
+  <div class="editor-mian">
+    <!-- 预留的头部区域 -->
+    <div class="editor-heder">
+      <button id="save">保存</button>
+    </div>
+
+    <div class="main flex space1">
+          <!-- 左侧写md区域 editor-md -->
+      <div class="editor-md">
+        <textarea name="" id="textarea" cols="30" rows="20"></textarea>
+      </div>
+
+      <!-- 右侧展示区域 editor-docsify -->
+      <div class="editor-docsify">
+        <div id="app"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.$docsify = {
+      name: '',
+      repo: '',
+      loadSidebar: false
+    }
+  </script>
+  <script src="./src/library/docsify/docsify.js"></script>
+  <script src="./src/js/index.js"></script>
+  <script>
+    // Docsify.againInit(str)
+  </script>
+</body>
+</html>
