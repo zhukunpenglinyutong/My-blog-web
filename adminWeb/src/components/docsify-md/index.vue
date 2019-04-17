@@ -8,7 +8,7 @@
     <div class="main flex space1">
           <!-- 左侧写md区域 editor-md -->
       <div class="editor-md">
-        <textarea @input="editorDataInputFn" v-model="editorData" name="" id="textarea" cols="30" rows="20"></textarea>
+        <textarea @input="editorDataInputFn" @keyup.ctrl.83.exact='save' v-model="editorData" name="" id="textarea" cols="30" rows="20"></textarea>
       </div>
 
       <!-- 右侧展示区域 editor-docsify -->
@@ -40,17 +40,27 @@ export default {
   },
 
   methods: {
+
     // 返给父组件值 | 如果有 v-model 就不需要这一步了
     getArticleText () {
-      console.log('返给父组件的值', this.editorData)
+      // console.log('返给父组件的值', this.editorData)
       return this.editorData
     },
+
     // 值改变触发，如果触发泰国频繁可以考虑 | 节流 或者更换事件的方法
     editorDataInputFn () {
-      console.log(window)
-      console.log('改变了', this.editorData)
+      // console.log(window)
+      // console.log('改变了', this.editorData)
       window.Docsify.againInit(this.editorData)
+    },
+
+    save () {
+      // console.log('触发保存方法，Mac系统下暂时不成功，只能用 ctrl + s的方式保存')
+      
+      // 触发父组件的保存方法
+      this.$emit('save')
     }
+
   }
 }
 </script>

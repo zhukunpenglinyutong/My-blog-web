@@ -6,7 +6,7 @@
     <el-input v-model="model.introduce" placeholder="请输入文章简介"></el-input>
     <!-- <mavon-editor v-model="model.articletext" @save="save(model)" /> -->
     <div style="height:600px;width:100%;">
-      <docsify-md ref="docsify" :articleData="model.articletext" class="docsify"></docsify-md>
+      <docsify-md @save="save" ref="docsify" :articleData="model.articletext" class="docsify"></docsify-md>
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
       // 获取内容
       this.model.articletext = this.$refs.docsify.getArticleText()
       // console.log(this.isOne)
-      console.log('保存前数据', this.model)
+      // console.log('保存前数据', this.model)
 
       if (this.isOne) { // 如果是第一次的话，那就是创建
         setArticleNew(this.model).then( res => {
