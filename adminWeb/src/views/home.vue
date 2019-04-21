@@ -1,12 +1,11 @@
 <template>
   <div>
     <router-link to="/md"><el-button type="primary">添加文章</el-button></router-link>
-    <el-button type="primary" @click="dialogTableVisible = true">添加分类</el-button>
     <el-table
       :data="table"
       stripe
       border
-      style="width: 100%;overflow: auto;height: 700px;">
+      style="width: 100%;overflow: auto;height: 625px;">
       <el-table-column
         prop="title"
         label="标题">
@@ -45,23 +44,15 @@
       </el-table-column>
     </el-table>
 
-    <!-- 添加分类弹出层 -->
-    <el-dialog width="30%" title="添加分类" :visible.sync="dialogTableVisible">
-      <el-input v-model="addTypeName" placeholder="请输入类型名称"></el-input>
-      <el-button @click="addBlogType">确定</el-button>
-    </el-dialog>
-
   </div>
 </template>
 
 <script>
-import { getArticletext, delectArticle, setType } from '../api/index.js'
+import { getArticletext, delectArticle } from '../api/index.js'
 
 export default {
   data () {
     return {
-      dialogTableVisible: false, // 控制 添加类型弹出层
-      addTypeName: '', // 添加类型 输入的名字
       table: null, // 表示传递 编辑组件的数据
     }
   },
@@ -101,16 +92,6 @@ export default {
             message: '已取消删除'
           });          
         });
-    },
-    addBlogType () { //（事件触发 --> API）添加分类 | 2019.4.1 朱昆鹏
-      setType({name: this.addTypeName}).then( res => {
-        console.log('res', res)
-        if (res.error == 0) {
-          this.$message.success('添加成功')
-          this.addTypeName = ''
-          this.dialogTableVisible = false
-        }
-      })
     }
   }
 }

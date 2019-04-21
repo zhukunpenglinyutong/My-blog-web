@@ -1,20 +1,8 @@
 <template>
   <div class="editor-mian">
-    <!-- 预留的头部区域 -->
-    <div class="editor-heder">
-      <!-- <button @click="save">保存</button> -->
-    </div>
-
-    <div class="main flex space1">
-          <!-- 左侧写md区域 editor-md -->
-      <div class="editor-md">
-        <textarea @input="editorDataInputFn" @keyup.ctrl.83='save' v-model="editorData" name="" id="textarea" cols="30" rows="20"></textarea>
-      </div>
-
-      <!-- 右侧展示区域 editor-docsify -->
-      <div class="editor-docsify">
-        <div id="app"></div>
-      </div>
+    <!-- 右侧展示区域 editor-docsify -->
+    <div class="editor-docsify">
+      <div id="app"></div>
     </div>
   </div>
 </template>

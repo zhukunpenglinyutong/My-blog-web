@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from './views/index.vue'
-import Home from './views/ishome.vue'
+
+import Index from './views/index.vue'
+import Home from './views/home.vue'
+import article from './views/article.vue'
 
 Vue.use(Router)
 
@@ -9,26 +11,26 @@ export default new Router({
   routes: [
     {
       path: '/', // 首页  
-      component: Home,
+      name: 'Index',
+      component: Index,
       children: [
         {
-          path:'/',
-          component: () => import('./views/home.vue')
-        },
-        {
-          path:'md',
-          component: () => import('./views/md.vue')
-        },
-        {
-          path:'type',
-          component: () => import('./views/type.vue')
-        },
-        {
-          path:'ishome',
-          component: () => import('./views/ishome.vue')
+          path: '/',
+          name: 'Home',
+          component: Home
         }
       ]
+    },
+    {
+      path: '/article',
+      name: 'article',
+      component: article
     }
+    // {
+    //   path: '/article',
+    //   name: 'article',
+    //   component: article
+    // }
     // {
     //   path: '/about',
     //   name: 'about',

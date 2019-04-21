@@ -1,0 +1,44 @@
+
+/* 
+ * ======= 最外层 ========
+ */
+ .z_card {
+  cursor:pointer;
+  max-width: 1200px;
+  height: 265px;
+  background-color: #eee;
+  padding: 10px;
+}
+.z_card h3 {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.z_card .z_card_con {
+  height: 190px;
+}
+.z_card .z_card_con .z_card_con_text1 {
+  padding: 10px 0px;
+  width: 800px;
+  max-height: 182px;  
+}
+.z_card .z_card_con .z_card_con_text {
+  line-height: 28px;
+  text-indent: 2em;
+  color: #444;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow-y: hidden;
+}
+.z_card .z_card_con_text_a {
+
+}
+.z_card .z_card_con_img {
+  background-color: #6600CC;
+  background-image: url('../Nav/img/bj.jpeg');
+  background-size:cover;
+  width: 330px;
+  min-height: 180px;
+  border-radius: 10px;
+}

@@ -1,0 +1,22 @@
+/* 工具库 */
+
+
+/* 文字类 */
+
+/* 文字居中 */
+.text_center {
+  /* 没有可行方案 */
+  /* text-align: center; */
+  /* display: table-cell; */
+  /* vertical-align:middle; */
+}
+/* 文字水平居中 */
+.text_center_x {
+  text-align: center;
+}
+/* 文字垂直居中 */
+.text_center_y {
+  /* 下面这种方式是对 行内元素才生效 */
+  /* display: table-cell; */
+  /* vertical-align:middle; */
+}

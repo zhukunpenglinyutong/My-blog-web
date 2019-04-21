@@ -1,0 +1,68 @@
+/* 
+  *
+  * 情景一：父子盒子类型，一个子盒子相对于一个父盒子的位置变换
+  *
+  * 对齐方式：水平方向上对齐
+  *
+ */
+ .flex {
+  display: flex;
+ }
+
+ /* 左对齐 右对齐 */
+ .left {
+  justify-content: flex-start;
+ }
+ .right {
+  justify-content: flex-end;
+ }
+
+ /* 上对齐 下对齐 */
+ .top {
+  align-items: flex-start;
+ }
+ .bottom {
+  align-items: flex-end;
+ }
+
+ /* 水平居中 | 垂直居中 */
+ .center_x {
+  justify-content: center;
+ }
+.center_y {
+  align-items: center;
+}
+
+ /* 居中对齐 */
+ .center {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+ }
+
+/* 
+  *
+  * 情景二：父容器下，有多个子容器
+  *
+  * 对齐方式：水平方向上对齐
+  *
+ */
+
+ /* 排列方向 */
+.ranks_y {
+  flex-direction: column;
+}
+.ranks_y_bottom {
+  justify-content: flex-end;
+}
+.ranks_y_right {
+  align-items: flex-end;  
+}
+ /* 分散对齐 */
+ /* space-between | space-around */
+ .space1 {
+  justify-content: space-between;
+ }
+ .space2 {
+  justify-content: space-around;
+ }
