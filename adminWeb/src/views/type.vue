@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" @click="dialogTableVisible = true">添加分类</el-button>
+    <el-button type="primary" @click="addTypeFun">添加分类</el-button>
     <el-table
       :data="table"
       stripe
@@ -46,7 +46,7 @@
 
     <!-- 编辑分类弹出层 -->
     <el-dialog width="30%" title="编辑分类" :visible.sync="dialogTableVisible1">
-      <el-input v-model="addTypeName1" placeholder="请输入类型名称"></el-input>
+      <el-input v-model="addTypeName1"></el-input>
       <el-button @click="addBlogType1">确定</el-button>
     </el-dialog>
 
@@ -63,6 +63,7 @@ export default {
       dialogTableVisible1: false, // 控制 编辑类型弹出层
       addTypeName: '', // 添加类型 输入的名字
       addTypeName1: '', // 编辑类型 输入的名字
+      pk: '', // 编辑类型中需要用到的PK
       table: null, // 表示传递 编辑组件的数据
     }
   },
@@ -73,19 +74,25 @@ export default {
     init () {
       this.initGetData()
     },
-    initGetData () { //（分担 init函数职责） 获取所有表格数据的方法
+    initGetData () { //（分担 init函数职责） 获取所有表格数据的方法，其他方法也可以调用
       getTypes('type/gettypes').then( res => {
         console.log(res)
         this.table = res.data
       })
     },
-    handleEdit (index, data) { //（事件触发 --> API） 编辑类型
+    addTypeFun () { //（事件）添加分类
+      // 开始
+      this.addTypeName = ''
+      this.dialogTableVisible = true
+    },
+    handleEdit (index, data) { //（事件）点击编辑触发
       console.log('点击数据',data)
 
       this.dialogTableVisible1 = true // 调出弹框
       this.addTypeName1 = data.name
+      this.pk = data.pk
     },
-    handleDelete (index, data) { //（事件触发 --> API） 删除类型
+    handleDelete (index, data) { //（API分类） 删除分类
       this.$confirm('是否删除', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -104,8 +111,7 @@ export default {
           });          
         });
     },
-    addBlogType () { //（事件触发 --> API）添加类型 | 2019.4.18 朱昆鹏
-      this.addTypeName = ''
+    addBlogType () { //（API事件）添加分类 | 2019.4.18 朱昆鹏
       insertType({name: this.addTypeName}).then( res => {
         console.log('res', res)
         if (res.error == 0) {
@@ -115,8 +121,19 @@ export default {
         }
       })
     },
-    addBlogType1 () {
-      
+    addBlogType1 () { // （API事件）编辑分类 | 2019.4.21 朱昆鹏
+      let data = {
+        name: this.addTypeName1,
+        pk: this.pk
+      }
+      updateType(data).then( res => {
+        console.log('res', res)
+        this.dialogTableVisible1 = false
+        if (res.data.changedRows > 0) {
+          this.$message.success('修改成功')
+          this.initGetData()
+        }
+      })
     }
   }
 }

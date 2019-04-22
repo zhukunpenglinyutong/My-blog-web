@@ -2,7 +2,17 @@
   <div>
     <el-button type="primary" @click="toPath">返回</el-button>
     <el-button @click="save" type="primary">保存</el-button>
-    <el-input v-model="model.title" placeholder="请输入文章标题"></el-input>
+    <div>
+      <el-input v-model="model.title" placeholder="请输入文章标题"></el-input>
+      <el-select v-model="value" placeholder="请选择">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
     <el-input v-model="model.introduce" placeholder="请输入文章简介"></el-input>
     <!-- <mavon-editor v-model="model.articletext" @save="save(model)" /> -->
     <div style="height:600px;width:100%;">
@@ -12,11 +22,13 @@
 </template>
 
 <script>
-import { setArticleNew, setArticle } from '../api/index.js'
+import { setArticleNew, setArticle, getDataBySql } from '../api/index.js'
 export default {
   // props:["model"],
   data () {
     return {
+      value: '',
+      options: [],
       model:{},
       isOne: true // 是否是第一次 创建？根据传过来的PK来判断，如果是新建的就没有PK
     }
@@ -34,9 +46,45 @@ export default {
         this.isOne
       }
       // console.log(this.isOne)
+
+      // this.initGetAritcle() // 获取文章数据 | 后期再整
+      this.initSelectData() // 获取
+    },
+
+    initGetAritcle () { // (API)获取文章数据 | 2019.4.21 朱昆鹏
+      // 数据这里后期再整吧
+      // console.log('PK是？', this.model.pk)
+    },
+
+    initSelectData () { //（API）拿到下拉框的所有值，和当前选中的值，前台要传过来一个文章PK，然后剩下的我们自己查
+
+      // 拿到当前文章的类型
+      let sql = `SELECT name FROM blog_type WHERE pk = (SELECT pk_article_type FROM blog_article WHERE pk = '${this.model.pk}')`
+      getDataBySql({sql}).then( res => {
+        console.log('res', res)
+        if (res.data.length > 0) {
+          // 错误处理啥的没做
+          this.value = res.data[0].name
+        }
+      })
+
+      // 拿到所有的类型
+      let sql1 = `SELECT * FROM blog_type WHERE dr = 1`
+      getDataBySql({sql:sql1}).then( res => {
+        // console.log('res1', res)
+        res.data.forEach( item => {
+          this.options.push({
+            value: item.pk,
+            label: item.name
+          })
+        })
+      })
+
     },
 
     save () { // 保存方法（新的是保存，旧的是修改）
+
+      this.saveType() // 保存类型
 
       // 获取内容
       this.model.articletext = this.$refs.docsify.getArticleText()
@@ -59,6 +107,26 @@ export default {
           }
         })
       }
+    },
+
+    saveType () { // (API事件) 保存类型 | 运用了一些复杂的逻辑
+      let value = ''
+      // /\w/.test(this.value.split('')[0])
+      if (/\w{8}(-\w{4}){3}-\w{12}|1/.test(this.value)) { // 判断类型是否为 UUID 或者 1
+        value = this.value
+      } else {
+        // console.log('首字母是汉字')
+        this.options.forEach( item => {
+          if (item.label === this.value) {
+            value = item.value
+          }
+        })
+      }
+      // console.log('value', value)
+      let sql = `UPDATE blog_article SET pk_article_type = '${value}' WHERE pk = '${this.model.pk}'`
+      getDataBySql({sql}).then( res => {
+        console.log('保存类型API', res)
+      })
     },
 
     // 跳转路由到首页

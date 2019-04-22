@@ -31,13 +31,18 @@
             <i class="el-icon-menu"></i>
             <span slot="title">数据统计</span>
           </el-menu-item>
-          <!-- 3.个人设置 -->
+          <!-- 3. 静态资源管理 -->
           <el-menu-item index="3">
+            <i class="el-icon-menu"></i>
+            <span slot="title">静态资源管理</span>
+          </el-menu-item>
+          <!-- 3.个人设置 -->
+          <el-menu-item index="4">
             <i class="el-icon-menu"></i>
             <span slot="title">个人设置</span>
           </el-menu-item>
           <!-- 4.用户管理 表示开放登录注册权限这一块的东西了 -->
-          <el-menu-item index="3" disabled>
+          <el-menu-item index="5" disabled>
             <i class="el-icon-menu"></i>
             <span slot="title">用户管理（暂定）</span>
           </el-menu-item>

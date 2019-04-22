@@ -21,7 +21,7 @@ export default {
   // 启动
   mounted () {
     initRun()
-    console.log('articleData', this.articleData)
+    // console.log('articleData', this.articleData)
     this.editorData = this.articleData
     // 第一次赋值
     window.Docsify.againInit(this.editorData)

@@ -50,3 +50,9 @@ export const updateType = params => {
 export const delectType = params => {
   return axios.post(`${url}type/delecttype`,params).then( res => res.data )
 }
+
+// ======================== | ==========================
+// (POST) getDataBySql
+export const getDataBySql = params => {
+  return axios.post(`${url}getdatabysql`,params).then( res => res.data )
+}

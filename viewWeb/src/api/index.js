@@ -10,3 +10,9 @@ const url = 'http://localhost:8000/api/serveweb/'
 export const getArticletext = params => {
   return axios.get(`${url}${params}`).then( res => res.data )
 }
+
+// ======================== | ==========================
+// (POST) getDataBySql
+export const getDataBySql = params => {
+  return axios.post(`${url}getdatabysql`,params).then( res => res.data )
+}
