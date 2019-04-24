@@ -1,58 +1,41 @@
-import axios from 'axios'
-const url = 'http://localhost:8000/api/serveweb/'
+import axiosApi from './plugin/axios'
 
 /**
  * 文章API部分（可以抽离出单独的模块）
  * @param {*}
- */
+*/
 
 // (GET) 获取所有文章内容
-export const getArticletext = params => {
-  return axios.get(`${url}${params}`).then( res => res.data )
-}
+export const getArticletext = params => axiosApi.get(`${params}`).then( res => res.data )
 
 // (POST) 新建文章
-export const setArticleNew = params => {
-  return axios.post(`${url}article/insertarticle`,params).then( res => res.data )
-}
+export const setArticleNew = params => axiosApi.post(`article/insertarticle`,params).then( res => res.data )
 
 // (POST) 文章内容写入
-export const setArticle = params => {
-  return axios.post(`${url}article/updatearticle`,params).then( res => res.data )
-}
+export const setArticle = params => axiosApi.post(`article/updatearticle`,params).then( res => res.data )
 
 // (POST) 文章内容删除
-export const delectArticle = params => {
-  return axios.post(`${url}article/delectarticle`,params).then( res => res.data )
-}
+export const delectArticle = params => axiosApi.post(`article/delectarticle`,params).then( res => res.data )
+
 
 /**
  * 类型API部分（可以抽离出单独的模块）
  * @param {*}
- */
+*/
 
 // (GET) 获取所有类型
-export const getTypes = params => {
-  return axios.get(`${url}${params}`).then( res => res.data )
-}
+export const getTypes = params => axiosApi.get(`${params}`).then( res => res.data )
 
 // (POST) 新建类型
-export const insertType = params => {
-  return axios.post(`${url}type/insertype`,params).then( res => res.data )
-}
+export const insertType = params => axiosApi.post(`type/insertype`,params).then( res => res.data )
 
 // (POST) 修改类型
-export const updateType = params => {
-  return axios.post(`${url}type/updatetype`,params).then( res => res.data )
-}
+export const updateType = params => axiosApi.post(`type/updatetype`,params).then( res => res.data )
 
 // (POST) 删除类型
-export const delectType = params => {
-  return axios.post(`${url}type/delecttype`,params).then( res => res.data )
-}
+export const delectType = params => axiosApi.post(`type/delecttype`,params).then( res => res.data )
 
-// ======================== | ==========================
+
+// ======================== 活动开放接口 ==========================
 // (POST) getDataBySql
-export const getDataBySql = params => {
-  return axios.post(`${url}getdatabysql`,params).then( res => res.data )
-}
+export const getDataBySql = params => axiosApi.post(`getdatabysql`,params).then( res => res.data )

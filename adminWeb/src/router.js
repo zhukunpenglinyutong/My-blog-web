@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from './views/index.vue'
-import Home from './views/ishome.vue'
+import store from './store'
+
+import Home from './views/index.vue'
+import Login from './views/login.vue' 
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/', // 首页  
@@ -22,20 +24,28 @@ export default new Router({
         {
           path:'type',
           component: () => import('./views/type.vue')
-        },
-        {
-          path:'ishome',
-          component: () => import('./views/ishome.vue')
         }
       ]
+    },
+    {
+      path: '/login', // 登录
+      component: Login
     }
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    // }
   ]
 })
+
+// 路由全局守卫
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login') {
+    if (store.state.islogin) { // 登录了
+      next()
+    } else { // 未登录
+      next('/login')
+      // router.push({ name: '/login' })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

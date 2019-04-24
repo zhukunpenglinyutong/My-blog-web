@@ -24,7 +24,9 @@
 <script>
 import { setArticleNew, setArticle, getDataBySql } from '../api/index.js'
 export default {
+  
   // props:["model"],
+
   data () {
     return {
       value: '',
@@ -33,10 +35,13 @@ export default {
       isOne: true // 是否是第一次 创建？根据传过来的PK来判断，如果是新建的就没有PK
     }
   },
+
   created () {
     this.init() // 处理是创建 还是 保存的逻辑
   },
+  
   methods: {
+
     init() {
       this.model = this.$store.state.mdModel
       console.log('this.model', this.model)
@@ -83,14 +88,22 @@ export default {
     },
 
     save () { // 保存方法（新的是保存，旧的是修改）
-
-      this.saveType() // 保存类型
-
       // 获取内容
       this.model.articletext = this.$refs.docsify.getArticleText()
-      // console.log(this.isOne)
-      // console.log('保存前数据', this.model)
 
+      // 获取 value
+      if (/\w{8}(-\w{4}){3}-\w{12}|1/.test(this.value)) { // 判断类型是否为 UUID 或者 1
+        this.model.value = this.value
+      } else {
+        // console.log('首字母是汉字')
+        this.options.forEach( item => {
+          if (item.label === this.value) {
+            this.model.value = item.value
+          }
+        })
+      }
+
+      // console.log('this.model', this.model)
       if (this.isOne) { // 如果是第一次的话，那就是创建
         setArticleNew(this.model).then( res => {
           // console.log('res', res)
@@ -100,6 +113,7 @@ export default {
         })
         this.isOne = false
       } else { // 大于一次的话，就是 保存了
+        this.saveType() // 保存类型
         setArticle(this.model).then(  res => {
           console.log(res)
           if (res.data.changedRows > 0) {
