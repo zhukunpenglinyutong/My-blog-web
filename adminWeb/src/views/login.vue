@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import { getDataBySql } from '../api/index.js'
+import { getDataBySql, login } from '../api/index.js'
 
 export default {
 
@@ -47,31 +47,44 @@ export default {
         
         // 只有校验通过，才执行函数
         if (valide) {
-          
-          let sql = `SELECT * FROM blog_user WHERE username = '${this.form.username}'`
-          
-          getDataBySql({sql}).then( res => {
-            // console.log('后端返给登录信息', res)
-            if (res.data.length === 0) {
-              this.$message.error('用户名不存在')
-
+                    
+          login({username: this.form.username, password: this.form.password}).then( res => {
+            if (res.error == -1) {
+              this.$message.error(res.message)
             } else {
-
-              if (res.data[0].password == this.form.password) { // 登录成功
-
-                // Vuex 中记录登录信息，跳转路由
-                this.$store.commit('setLogin', res.data[0])
-                this.$store.commit('setIsLogin', true)
-                // console.log('this.$store.state.login', this.$store.state.login)
-                this.$router.push({path:'/'})
-                this.$message.success('登录成功')
-                
-              } else {
-
-                this.$message.error('密码错误')
-              }
+              console.log('res', res)
+              // 密码正确，将 token 保存 | 保存到localStorage
+              localStorage.setItem('token', res.data.token)
+              //并且跳转路由
+              this.$store.commit('setLogin', res.data)
+              this.$store.commit('setIsLogin', true)
+              this.$router.push({path: '/'})
+              this.$message.success('登录成功')
             }
           })
+
+          // getDataBySql({sql}).then( res => {
+          //   // console.log('后端返给登录信息', res)
+          //   if (res.data.length === 0) {
+          //     this.$message.error('用户名不存在')
+
+          //   } else {
+
+          //     if (res.data[0].password == this.form.password) { // 登录成功
+
+          //       // Vuex 中记录登录信息，跳转路由
+          //       this.$store.commit('setLogin', res.data[0])
+          //       this.$store.commit('setIsLogin', true)
+          //       // console.log('this.$store.state.login', this.$store.state.login)
+          //       this.$router.push({path:'/'})
+          //       this.$message.success('登录成功')
+                
+          //     } else {
+
+          //       this.$message.error('密码错误')
+          //     }
+          //   }
+          // })
 
         } else {
           this.$message.info('请输入用户名和密码')

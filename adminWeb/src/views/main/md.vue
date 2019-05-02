@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { setArticleNew, setArticle, getDataBySql } from '../api/index.js'
+import { setArticleNew, setArticle, getDataBySql } from '../../api/index.js'
 export default {
   
   // props:["model"],

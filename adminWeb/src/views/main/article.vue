@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { getArticletext, delectArticle, getDataBySql } from '../api/index.js'
+import { getArticletext, delectArticle, getDataBySql } from '../../api/index.js'
 
 export default {
   data () {

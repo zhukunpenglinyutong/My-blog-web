@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { getTypes, insertType, updateType, delectType } from '../api/index.js'
+import { getTypes, insertType, updateType, delectType } from '../../api/index.js'
 
 export default {
   data () {

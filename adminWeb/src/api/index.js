@@ -39,3 +39,9 @@ export const delectType = params => axiosApi.post(`type/delecttype`,params).then
 // ======================== 活动开放接口 ==========================
 // (POST) getDataBySql
 export const getDataBySql = params => axiosApi.post(`getdatabysql`,params).then( res => res.data )
+
+// 登录接口
+export const login = params => axiosApi.post(`login`, params).then( res => res.data )
+
+// 验证token是否过期
+export const checkToken = params => axiosApi.post(`token`, params).then( res => res.data )

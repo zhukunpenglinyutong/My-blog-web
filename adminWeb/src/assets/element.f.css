@@ -1,0 +1,8 @@
+
+/* 覆盖总览页面：7日日历颜色为白色的问题 */
+.el-calendar-table .el-calendar-day {
+  line-height: 69px;
+  text-align: center;
+  color: #000;
+  font-weight: 600;
+}

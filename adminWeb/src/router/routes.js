@@ -2,19 +2,23 @@
 const routes = [
   {
     path: '/', // 首页  
-    component: () => import('../views/index.vue'),
+    component: () => import('../views/index.vue'), // main路由
     children: [
       {
         path:'/',
-        component: () => import('../views/home.vue')
+        component: () => import('../views/main/overview.vue') // 总览
+      },
+      {
+        path:'/article',
+        component: () => import('../views/main/article.vue') // 添加文章
       },
       {
         path:'md',
-        component: () => import('../views/md.vue')
+        component: () => import('../views/main/md.vue') // 书写文章
       },
       {
         path:'type',
-        component: () => import('../views/type.vue')
+        component: () => import('../views/main/type.vue') // 文章类型管理
       }
     ]
   },

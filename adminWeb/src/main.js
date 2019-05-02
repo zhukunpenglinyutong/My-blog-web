@@ -16,6 +16,10 @@ Vue.use(ElementUI)
 import docsifyMd from './components/docsify-md/index'
 Vue.use(docsifyMd)
 
+// 引入 highcharts
+import VueHighcharts from 'vue-highcharts';
+Vue.use(VueHighcharts)
+
 Vue.config.productionTip = false
 
 new Vue({
